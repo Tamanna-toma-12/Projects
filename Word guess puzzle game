@@ -1,0 +1,94 @@
+#include<bits/stdc++.h>
+using namespace std;
+void display()
+{
+    cout<<"A puzzle of word alphabet is shown on screen . You have to guess a hidden correct"<<endl;
+    cout<<"Word from the puzzle. For each correct guessing you will get one score"<<endl<<endl;
+}
+int GameFunction();
+int main()
+{
+    cout<<"******************** WELCOME IN WORD GUESE PUZZLE GAME ********************"<<endl;
+    display();
+    cout<<"What your name?"<<endl;
+    string name;
+    cin>>name;
+    int score=0;
+    string choice;
+    do
+    {
+        score+=GameFunction();
+      cout<<"Would you play again Yes/No " <<endl;
+      cin>>choice;
+      cout<<endl;
+      system ("cls");
+      cout<<"******************** WELCOME IN WORD GUESE PUZZLE GAME ********************"<<endl;
+    }while(choice!="No");
+    cout<<"Thanks for your participation"<<endl;
+    cout<<name<<" your score is :"<<score<<endl;
+    return 0;
+}
+int GameFunction(){
+  string array[10]={"Java","C#","Python","Kotlin","c++","html","css","php","hello","cat"};
+  char matrix[10][10];
+  int r;
+  char c;
+  for(int i=0;i<10;i++){
+    for(int j=0;j<10;j++){
+        r=rand()%26;
+        c='a'+r;
+        matrix[i][j]=c;
+    }
+  }
+  int index=rand()%10;
+  string output=array[index];
+  if(array[index].size()%2==0){
+    int row=rand()%10;
+    int col=rand()%3;
+    for(int i=0;i<array[index].size();i++,col++){
+        matrix[row][col]=array[index][i];
+    }
+  }
+  else
+  {
+     int row=rand()%3;
+    int col=rand()%10;
+    for(int i=0;i<array[index].size();i++,row++){
+        matrix[row][col]=array[index][i];
+    }
+  }
+  for(int i=0;i<10;i++){
+    for(int j=0;j<10;j++){
+        cout<<matrix[i][j]<<" ";
+    }
+    cout<<endl;
+  }
+  a:
+  string guess;
+  int x;
+  cout<<"If you want to guess the word directly press: 1"<<endl;
+  cout<<"If you first want hints then guess the word press: 2"<<endl;
+  cin>>x;
+  if(x==1){
+    cout<<"Enter your guess word"<<endl;
+    cin>>guess;
+  }
+  else if(x==2){
+    cout<<"The size of the word is: "<<output.size()<<endl;
+    cout<<"Enter your guess word"<<endl;
+    cin>>guess;
+  }
+  else{
+    cout<<"Enter a valid input"<<endl;
+    goto a;
+  }
+  if(guess==output){
+    cout<<"Congratulations you have guess the right word"<<endl;
+    return 1;
+  }
+  else{
+    cout<<"Sorry you are not guess the right word"<<endl;
+    return 0;
+  }
+
+}
